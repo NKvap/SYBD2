@@ -12,8 +12,8 @@ class HallController extends Controller
      */
     public function index()
     {
-        return view('halls', [
-            'halls' => Hall::all()
+        return view('hall', [
+            'hall' => Hall::all()
         ]);
     }
 
@@ -38,7 +38,9 @@ class HallController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('halls', [
+            'halls' =>Hall::all()->where('id', $id)->first()
+        ]);
     }
 
     /**

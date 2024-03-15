@@ -13,8 +13,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user', [
-            'user' => User::all()
+        return view('users', [
+            'users' => User::all()
         ]);
     }
 
@@ -39,7 +39,9 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('user', [
+            'user' =>User::all()->where('id', $id)->first()
+        ]);
     }
 
     /**

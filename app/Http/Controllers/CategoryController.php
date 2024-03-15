@@ -38,7 +38,9 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('category', [
+            'category' => Category::all()->where('id', $id)->first()
+        ]);
     }
 
     /**

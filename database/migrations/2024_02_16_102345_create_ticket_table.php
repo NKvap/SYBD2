@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ticket', function (Blueprint $table) {
+        Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->integer('place');
             $table->integer('row');
-            $table->unsignedBigInteger('id_session');
-            $table->foreign('id_session')->references('id')->on('session');
+            $table->unsignedBigInteger('session_id');
+            $table->foreign('session_id')->references('id')->on('sessions');
+            $table->unsignedBigInteger('users_id');
+            $table->foreign('users_id')->references('id')->on('users');
         });
     }
 

@@ -12,8 +12,8 @@ class SessionController extends Controller
      */
     public function index()
     {
-        return view('sessions', [
-            'sessions' => Session::all()
+        return view('session', [
+            'session' => Session::with('films')->get()->all()
         ]);
     }
 
@@ -38,7 +38,9 @@ class SessionController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('sessions', [
+            'sessions' =>Session::all()->where('id', $id)->first()
+        ]);
     }
 
     /**

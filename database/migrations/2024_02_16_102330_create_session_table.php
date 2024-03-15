@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('session', function (Blueprint $table) {
+        Schema::create('sessions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_film');
-            $table->foreign('id_film')->references('id')->on('film');
-            $table->unsignedBigInteger('id_hall');
-            $table->foreign('id_hall')->references('id')->on('hall');
+            $table->unsignedBigInteger('film_id');
+            $table->foreign('film_id')->references('id')->on('films');
+            $table->unsignedBigInteger('hall_id');
+            $table->foreign('hall_id')->references('id')->on('halls');
             $table->date('date');
             $table->integer('price');
             $table->time('time');
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('session');
+        Schema::dropIfExists('sessions');
     }
 };

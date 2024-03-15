@@ -39,9 +39,7 @@ class TicketController extends Controller
      */
     public function show(string $id)
     {
-        return view('tickets', [
-            'tickets' =>Session::all()->where('id', $id)->first()
-        ]);
+        //
     }
 
     /**
