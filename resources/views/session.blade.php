@@ -30,6 +30,7 @@
             <td>{{$sessions->time}}</td>
         </tr>
     @endforeach
-</table>
+    </table>
+{{$session->links()}}
 </body>
 </html>

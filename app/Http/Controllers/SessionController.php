@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Film;
 use App\Models\Session;
 use Illuminate\Http\Request;
 
@@ -10,10 +11,11 @@ class SessionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $perpage = $request->perpage ?? 3;
         return view('session', [
-            'session' => Session::with('films')->get()->all()
+            'session' => Session::paginate($perpage)->withQueryString(), 'films'=>Film::get()->all()
         ]);
     }
 
