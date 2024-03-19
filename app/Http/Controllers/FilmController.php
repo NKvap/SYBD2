@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Film;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class FilmController extends Controller
 {
@@ -94,6 +96,10 @@ class FilmController extends Controller
      */
     public function destroy(string $id)
     {
+        if (! Gate::allows('destroy-film', Film::all()->where('id', $id)->first())) {
+            return redirect('/error')->with('message',
+                'У вас нет разрешения на удаления данной категории ' . $id);
+        }
         Film::destroy($id);
         return redirect('/film');
     }
