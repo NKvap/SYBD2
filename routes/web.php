@@ -21,18 +21,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('start');
 });
 
 Route::get('/hello', function () {
     return view('hello', ['title' => 'Hello world!']);
 });
 
-Route::get('/category', [CategoryController::class, 'index'])->middleware('auth');
+Route::get('/category', [CategoryController::class, 'index']);
 
 Route::get('/category/{id}', [CategoryController::class, 'show'])->middleware('auth');
 
 Route::get('/film', [FilmController::class, 'index'])->name('film.index')->middleware('auth');
+
+Route::get('/film/create', [FilmController::class, 'create'])->name('create')->middleware('auth');
 
 Route::get('/film/{id}', [FilmController::class, 'show'])->middleware('auth');
 
@@ -49,8 +51,6 @@ Route::get('/ticket', [TicketController::class, 'index'])->middleware('auth');
 Route::get('/user', [UserController::class, 'index'])->middleware('auth');
 
 Route::get('/user/{id}', [UserController::class, 'show'])->middleware('auth');
-
-Route::get('/film/create', [FilmController::class, 'create'])->name('film.create')->middleware('auth');
 
 Route::post('/film', [FilmController::class, 'store'])->name('film.store')->middleware('auth');
 

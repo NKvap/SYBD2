@@ -1,33 +1,32 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>605-01</title>
-</head>
-<body>
-<h2>{{$user ? "Имя пользователя: ".$user->name : 'Неверный id пользователя'}}</h2>
-@if($user)
-    <table border="1">
-        <thead>
-            <td>id</td>
-            <td>Место</td>
-            <td>Ряд</td>
-            <td>Дата</td>
-            <td>Время</td>
-        </thead>
-        @foreach($user->ticket as $tickets)
-            <tr>
-                <td>{{$tickets->id}}</td>
-                <td>{{$tickets->place}}</td>
-                <td>{{$tickets->row}}</td>
-                <td>{{$tickets->sessions->date}}</td>
-                <td>{{$tickets->sessions->time}}</td>
-            </tr>
-        @endforeach
-    </table>
-@endif
-</body>
-</html>
+@extends('layout')
+@section('content')
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <h2>{{ $user ? "Имя пользователя: ".$user->name : 'Неверный id пользователя' }}</h2>
+            @if($user)
+                <table class="table table-bordered mt-3">
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Место</th>
+                        <th>Ряд</th>
+                        <th>Дата</th>
+                        <th>Время</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($user->ticket as $ticket)
+                        <tr>
+                            <td>{{ $ticket->id }}</td>
+                            <td>{{ $ticket->place }}</td>
+                            <td>{{ $ticket->row }}</td>
+                            <td>{{ $ticket->sessions->date }}</td>
+                            <td>{{ $ticket->sessions->time }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            @endif
+        </div>
+    </div>
+@endsection

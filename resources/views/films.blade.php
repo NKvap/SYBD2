@@ -1,35 +1,35 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>605-01</title>
-</head>
-<body>
-    <h2>Список фильмов</h2>
-    <table border="1">
-        <thead>
-            <td>id</td>
-            <td>Наименование</td>
-            <td>Категория</td>
-        </thead>
-    @foreach($films as $film)
-        <tr>
-            <td>{{$film->id}}</td>
-            <td>{{$film->name_film}}</td>
-            <td>{{$film->category->name}}</td>
-            <td>
-                <a href="{{ route('film.edit', $film->id) }}">Редактировать</a>
-                <form method="POST" action="{{ route('film.destroy', $film->id) }}">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit">Удалить</button>
-                </form>
-            </td>
-        </tr>
-    @endforeach
-    </table>
-</body>
-</html>
+@extends('layout')
+@section('content')
+    <div class="row justify-content-center mt-5">
+        <div class="col-8">
+            <h2>Список фильмов</h2>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Наименование</th>
+                    <th>Категория</th>
+                    <th>Действия</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($films as $film)
+                    <tr>
+                        <td>{{$film->id}}</td>
+                        <td>{{$film->name_film}}</td>
+                        <td>{{$film->category->name}}</td>
+                        <td>
+                            <a href="{{ route('film.edit', $film->id) }}" class="btn btn-primary">Редактировать</a>
+                            <form method="POST" action="{{ route('film.destroy', $film->id) }}" style="display: inline-block;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Удалить</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+@endsection

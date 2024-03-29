@@ -25,10 +25,10 @@ class FilmController extends Controller
      */
     public function create()
     {
-        $film = new Film();
+        //$film = new Film();
         $categories = Category::all();
         return view('film_create',[
-           'categories' => $categories, 'film' => $film
+           'categories' => $categories
         ]);
     }
 
@@ -97,10 +97,10 @@ class FilmController extends Controller
     public function destroy(string $id)
     {
         if (! Gate::allows('destroy-film', Film::all()->where('id', $id)->first())) {
-            return redirect('/error')->with('message',
-                'У вас нет разрешения на удаления данной категории ' . $id);
+            return redirect('/film')->withErrors(['error'=> 'У вас нет разрешения на удаления данной категории ' . $id]);
         }
+
         Film::destroy($id);
-        return redirect('/film');
+        return redirect('/film')->withErrors(['success'=>'Категория успешно удалена!']);
     }
 }

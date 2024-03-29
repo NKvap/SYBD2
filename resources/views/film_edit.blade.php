@@ -1,26 +1,25 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Редактирование</title>
-</head>
-<body>
-<h2>Редактирование фильма</h2>
-<form method="post" action="{{ route('film.update', ['id' => $film->id])}}">
-    @csrf
-    <label>Название категории</label>
-    <input type="text" name="category" value="{{ $film->category->name }}" readonly/>
-    <br>
-    <label>Название фильма</label>
-    <input type="text" name="name_film" value="{{ old('name') ?? $film->name_film }}" />
-    @error('name_film')
-    <div class="is-invalid">{{ $message }}</div> <!-- Исправляем вывод ошибки -->
-    @enderror
-    <br>
-    <input type="submit" value="Обновить"> <!-- Изменяем текст кнопки на "Обновить" -->
-</form>
-</body>
-</html>
+@extends('layout')
+@section('content')
+    <div class="row justify-content-center" style="margin-top: 70px;">
+        <div class="col-6">
+            <h2>Редактирование фильма</h2>
+            <form method="post" action="{{ route('film.update', ['id' => $film->id])}}">
+                @csrf
+                <div class="mb-3">
+                    <label for="category">Название категории</label>
+                    <input type="text" class="form-control" name="category" value="{{ $film->category->name }}" readonly>
+                </div>
+                <div class="mb-3">
+                    <label for="name_film">Название фильма</label>
+                    <input type="text" class="form-control @error('name_film') is-invalid @enderror" name="name_film" value="{{ old('name_film') ?? $film->name_film }}">
+                    @error('name_film')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+                <button type="submit" class="btn btn-primary">Обновить</button>
+            </form>
+        </div>
+    </div>
+@endsection
